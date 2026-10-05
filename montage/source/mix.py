@@ -11,35 +11,35 @@ bus[:n]+=m*0.62
 ev=[]
 def at(fr,x,g=1.0,pan=0.0,lead=0.0): place(bus,x,F(fr)-lead,g,pan)
 # intro riser -> impact at drop
-at(72,riser(2.3),0.55,lead=2.3)
-at(72,impact(),0.55)
+at(72,riser(2.3),0.16,lead=2.3)
+at(72,lp(impact(),900),0.22)
 at(6,shimmer(0.8,7,84,1.4),0.35)
 # transition whooshes (peak at cut)
 for c,kind in [(144,'whip'),(216,'zoom'),(360,'whip'),(648,'whip'),(792,'zoom'),(864,'whip'),(1008,'whip')]:
-    d=0.7; x=whoosh(d,0.6,250 if kind=='zoom' else 350,3200 if kind=='zoom' else 4200,500,1.1)
-    at(c,x,0.55,lead=0.6*d)
-at(576,whoosh(0.5,0.6,600,6000,1500,1.4),0.4,lead=0.3); at(576,impact(0.5),0.35)   # flash cut into break
+    d=0.6; x=lp(whoosh(d,0.6,200,1800,350,0.8),4500)
+    at(c,x,0.16,lead=0.6*d)
+at(576,lp(whoosh(0.45,0.6,300,2200,500,0.8),4500),0.13,lead=0.27)   # flash cut into break
 # taps
-for fr in [162]+[378+36*k for k in range(6)]+[584,810,1062]: at(fr,tap(),0.55,pan=0.1)
+for fr in [162]+[378+36*k for k in range(6)]+[584,810,1062]: at(fr,tap(),0.30,pan=0.1)
 # chip slide swishes (out 220ms + in)
-for k in range(6): at(378+36*k+4,swish(),0.32,pan=-0.2)
+for k in range(6): at(378+36*k+4,lp(swish(),5000),0.10,pan=-0.2)
 # typing
-for fr in [592,598,604,610]: at(fr,key(),0.45,pan=0.05)
+for fr in [592,598,604,610]: at(fr,key(),0.28,pan=0.05)
 # scroll whooshes
-at(170,scrollwhoosh(0.8),0.45); at(266,scrollwhoosh(1.6),0.18); at(934,scrollwhoosh(1.0),0.35)
+at(170,lp(scrollwhoosh(0.8),3500),0.14); at(934,lp(scrollwhoosh(1.0),3500),0.11)
 # stamps
-for i,fr in enumerate([666,684,702,720]): at(fr,stamp(),0.75,pan=-0.3+0.2*i)
-at(738,shimmer(1,9,86,1.2),0.5)
+for i,fr in enumerate([666,684,702,720]): at(fr,stamp(),0.45,pan=-0.3+0.2*i)
+at(738,shimmer(1,9,86,1.2),0.28)
 # dark mode toggle
-at(810,toggle(),0.6)
+at(810,toggle(),0.32)
 # map pings
 for fr in [866,932,998]: at(fr,ping(),0.18 if fr!=866 else 0.25,pan=0.15)
 # caption pops
-for fr in [396,584,668,738,818,880,966,1012]: at(fr,pop(),0.22)
+for fr in [396,584,668,738,818,880,966,1012]: at(fr,pop(),0.10)
 # outro
-at(1080,shimmer(1,10,84,1.8),0.45); at(1080,whoosh(1.2,0.6,200,2500,300,0.8),0.5,lead=0.6)
-at(1098,impact(0.8),0.6)
-for fr in [1116,1134,1152,1170]: at(fr,pop(0.8),0.16)
+at(1080,shimmer(1,10,84,1.8),0.25); at(1080,lp(whoosh(1.2,0.6,200,1800,300,0.7),4000),0.14,lead=0.6)
+at(1098,lp(impact(0.8),800),0.22)
+for fr in [1116,1134,1152,1170]: at(fr,pop(0.8),0.08)
 
 # ---------- NEON DIGITAL end card ----------
 def saw(f,t): return 2*((f*t)%1)-1
@@ -64,16 +64,15 @@ N0=1224
 at(N0,pad([57,60,64,67,71],5.9),0.30)
 at(N0,pad([45],5.9),0.2)
 # flicker zaps synced with the visual sequences
-for t0,seq in [(1236,'0100110111'),(1246,'1001011011')]:
+for t0,seq in [(1236,'0101101111')]:
     for d,ch in enumerate(seq):
-        if ch=='1' and (d==0 or seq[d-1]=='0'): at(t0+d,zap(),0.45,pan=-0.3 if t0==1236 else 0.3)
-h=hum((1372-1236)/30)*np.linspace(1,1,int((1372-1236)/30*SR))
-at(1236,h,0.10)
-at(1236,impact(0.7),0.45); at(1246,impact(0.4),0.25)
-at(1266,shimmer(1,8,88,1.0),0.38); at(1266,whoosh(0.6,0.6,400,5000,900,1.2),0.35,lead=0.36)
-at(1292,swish(),0.3)
-at(1306,pop(0.9),0.2)
-at(1318,pop(1),0.3); at(1318,shimmer(1,6,93,0.6),0.3)
+        if ch=='1' and (d==0 or seq[d-1]=='0'): at(t0+d,lp(zap(),3000),0.14,pan=-0.3 if t0==1236 else 0.3)
+at(1236,lp(hum((1372-1236)/30),600),0.04)
+at(1236,lp(impact(0.7),700),0.2)
+at(1266,shimmer(1,8,88,1.0),0.22)
+at(1292,lp(swish(),4000),0.08)
+at(1306,pop(0.9),0.08)
+at(1318,pop(1),0.10); at(1318,shimmer(1,6,93,0.6),0.18)
 # soft digital arpeggio
 seq=[69,72,76,79,81,79,76,72]
 fr=1266
