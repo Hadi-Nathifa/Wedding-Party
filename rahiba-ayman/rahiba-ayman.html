@@ -519,16 +519,6 @@ document.getElementById('open-btn').addEventListener('click',function(){
     </div>
     <div class="year rv">2026</div>
     <div class="time-line rv">الساعة 6:00 مساءً</div>
-    <div class="actions rv">
-      <button class="pill" id="cal-android" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 10.5a5 5 0 0 1 10 0V17H7z"/><path d="M5 11v5M19 11v5M10 17v3M14 17v3M8.5 5.5 7.5 4M15.5 5.5l1-1.5"/><circle cx="10" cy="9" r=".6" fill="currentColor"/><circle cx="14" cy="9" r=".6" fill="currentColor"/></svg>
-        تقويم Android
-      </button>
-      <button class="pill" id="cal-ics" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg>
-        تقويم iPhone
-      </button>
-    </div>
   </section>
 
   <section id="countdown">
@@ -716,32 +706,6 @@ function burst(){
 const cue=document.getElementById('cue'),toastEl=document.getElementById('toast');
 addEventListener('scroll',()=>{if(scrollY>40)cue.classList.remove('show')},{passive:true});
 function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>toastEl.classList.remove('show'),2400)}
-
-/* ---- calendar: iPhone gets an .ics file, Android opens its calendar app ---- */
-function saveIcs(){
-  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Rahiba-Ayman//Invitation//AR','BEGIN:VEVENT',
-    'UID:rahiba-ayman-20261017@invitation','DTSTAMP:20261007T000000Z',
-    'DTSTART:20261017T150000Z','DTEND:20261017T200000Z',
-    'SUMMARY:زفاف راهبة & أيمن','LOCATION:قاعة سنوني للحفلات',
-    'DESCRIPTION:https://maps.app.goo.gl/FGuvR81DcYF4pGHw9',
-    'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:غداً زفاف راهبة & أيمن','END:VALARM',
-    'END:VEVENT','END:VCALENDAR'].join('\r\n');
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));
-  a.download='rahiba-ayman.ics';document.body.appendChild(a);a.click();a.remove();
-  toast('تم تجهيز موعد الحفل للتقويم');
-}
-document.getElementById('cal-ics').addEventListener('click',saveIcs);
-document.getElementById('cal-android').addEventListener('click',()=>{
-  if(!/Android/i.test(navigator.userAgent)){saveIcs();return}
-  const e=encodeURIComponent;
-  location.href='intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/event;'+
-    'S.title='+e('زفاف راهبة & أيمن')+';S.eventLocation='+e('قاعة سنوني للحفلات')+';'+
-    'S.description='+e('https://maps.app.goo.gl/FGuvR81DcYF4pGHw9')+';'+
-    'l.beginTime=1792249200000;l.endTime=1792267200000;end';
-  // if no calendar app answered, fall back to the .ics file
-  setTimeout(()=>{if(!document.hidden)saveIcs()},1800);
-});
 
 /* ---- share ---- */
 document.getElementById('share').addEventListener('click',async()=>{
