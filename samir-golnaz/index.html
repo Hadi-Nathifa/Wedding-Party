@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>سمير & گولناز</title>
+<meta name="description" content="دعوة زفاف سمير & گولناز — الثلاثاء 29 سبتمبر 2026، قاعة خملين الملكية">
+<meta name="theme-color" content="#F6EFE3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: one narrow column of light on a sunlit ivory wall — sheer curtain on the edge, leaf shadows, a flowering branch in the corner */
+:root{
+  --wall:#F6EFE3;        /* sunlit ivory wall */
+  --wall-shade:#E8DCC8;  /* wall in shadow */
+  --linen:#FBF7F0;       /* brightest light */
+  --gold:#A9844F;        /* antique gold */
+  --gold-deep:#7A5B32;   /* burnished gold */
+  --gold-pale:#E9D6AE;   /* champagne */
+  --ink:#3B2D22;         /* espresso ink */
+  --ink-soft:#76644F;    /* faded ink */
+  --leaf:rgba(92,72,50,.20);
+  --f-display:'Aref Ruqaa','Amiri',serif;
+  --f-body:'Amiri','Scheherazade New',serif;
+  --f-script:'Pinyon Script','Cormorant Garamond',cursive;
+  --f-latin:'Cormorant Garamond','Times New Roman',serif;
+  --foil:linear-gradient(100deg,var(--gold-deep) 0%,#B8935A 22%,#F1DFB6 40%,#C29C60 55%,var(--gold-deep) 75%,#B8935A 100%);
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{
+  background:var(--wall);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:18px;
+  line-height:1.9;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body.locked{overflow:hidden;height:100vh}
+
+/* ---------- Atmosphere (fixed layers) ---------- */
+.wall{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 70% 15%, var(--linen) 0%, transparent 60%),
+    linear-gradient(160deg, var(--wall-shade) 0%, var(--wall) 45%, var(--wall) 70%, var(--wall-shade) 100%);
+}
+.wall::after{ /* floor line, like the room in the video */
+  content:"";position:absolute;left:0;right:0;bottom:0;height:18vh;
+  background:linear-gradient(180deg, rgba(232,220,200,0) 0%, rgba(232,220,200,.55) 6%, rgba(251,247,240,.7) 100%);
+}
+.beams{position:fixed;inset:-20%;z-index:1;pointer-events:none;mix-blend-mode:screen}
+.beam{
+  position:absolute;top:-10%;height:140%;
+  background:linear-gradient(90deg, transparent, rgba(255,251,240,.85), transparent);
+  transform:rotate(32deg);filter:blur(18px);
+  animation:breathe 9s ease-in-out infinite;
+}
+.beam.b1{left:28%;width:16vw;animation-delay:0s}
+.beam.b2{left:46%;width:7vw;animation-delay:2.5s;opacity:.7}
+.beam.b3{left:58%;width:20vw;animation-delay:5s;opacity:.8}
+@keyframes breathe{0%,100%{opacity:.45}50%{opacity:1}}
+
+#leaves{
+  position:fixed;z-index:1;pointer-events:none;
+  top:-4vh;left:-6vw;width:min(78vw,760px);height:auto;
+  filter:blur(3px);mix-blend-mode:multiply;
+  transform-origin:0 0;animation:sway 11s ease-in-out infinite;
+}
+@keyframes sway{0%,100%{transform:rotate(0deg)}50%{transform:rotate(1.6deg) translateY(4px)}}
+
+.sheer{
+  position:fixed;top:0;bottom:0;right:0;width:min(30vw,340px);z-index:2;pointer-events:none;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,.0) 0px, rgba(255,255,255,.55) 14px, rgba(255,255,255,.12) 30px,
+      rgba(255,255,255,.62) 46px, rgba(255,255,255,.08) 64px, rgba(255,255,255,.45) 80px);
+  -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 45%);
+          mask-image:linear-gradient(90deg, transparent 0%, #000 45%);
+  transform-origin:top right;animation:billow 13s ease-in-out infinite;
+}
+@keyframes billow{0%,100%{transform:skewX(0deg)}50%{transform:skewX(-2.2deg)}}
+
+#bloom{position:fixed;z-index:2;pointer-events:none;right:-10px;bottom:-10px;width:min(46vw,440px);height:auto}
+#bloom-top{position:fixed;z-index:2;pointer-events:none;left:-10px;top:-10px;width:min(26vw,240px);height:auto;transform:rotate(180deg);opacity:.75}
+#dust{position:fixed;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+
+/* ---------- Opening: sheer curtains & monogram ---------- */
+.opening{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:24px 16px}
+.drape{
+  position:absolute;top:0;bottom:0;width:53%;z-index:0;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(251,246,237,.96) 0px, rgba(255,255,255,.99) 16px, rgba(236,226,208,.94) 34px,
+      rgba(255,253,248,.99) 52px, rgba(241,232,216,.95) 70px, rgba(251,246,237,.97) 88px);
+  box-shadow:0 0 60px rgba(122,91,50,.18);
+  transition:transform 2.4s cubic-bezier(.7,0,.2,1), opacity 2.4s ease;
+}
+.drape::after{ /* light glowing through the fabric */
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0) 40%, rgba(169,132,79,.10));
+}
+.drape.l{left:0;transform-origin:left center}
+.drape.r{right:0;transform-origin:right center}
+.opening.open .drape.l{transform:translateX(-96%) scaleX(.35)}
+.opening.open .drape.r{transform:translateX(96%) scaleX(.35)}
+.opening.gone{display:none}
+
+.seal{
+  position:relative;z-index:1;text-align:center;display:grid;justify-items:center;gap:14px;
+  transition:opacity 1.1s ease, transform 1.4s ease, filter 1.1s ease;
+}
+.opening.open .seal{opacity:0;transform:translateY(-24px) scale(.96);filter:blur(6px)}
+
+.date-type{
+  font-family:var(--f-script);font-size:clamp(1.5rem,5.5vw,2rem);color:var(--ink);
+  letter-spacing:.18em;direction:ltr;min-height:1.6em;
+}
+.date-type span{opacity:0;display:inline-block;animation:ink .5s ease forwards}
+@keyframes ink{from{opacity:0;filter:blur(4px)}to{opacity:1;filter:blur(0)}}
+
+.medallion{position:relative;width:min(260px,66vw);aspect-ratio:1;display:grid;place-items:center}
+.medallion svg.ring{position:absolute;inset:0;width:100%;height:100%;animation:turn 60s linear infinite}
+@keyframes turn{to{transform:rotate(360deg)}}
+.mono{
+  display:flex;align-items:center;gap:.08em;direction:rtl;
+  font-family:var(--f-display);font-size:clamp(4.2rem,17vw,5.6rem);line-height:1;
+}
+.mono b{
+  font-weight:700;background:var(--foil);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  clip-path:inset(0 0 0 100%);
+  animation:write 1.6s cubic-bezier(.55,.1,.3,1) forwards, foil 7s linear infinite;
+  padding:.18em .06em;
+}
+.mono b:nth-child(1){animation-delay:1.6s,0s}
+.mono b:nth-child(3){animation-delay:2.6s,0s}
+.mono i{font-style:normal;font-family:var(--f-script);font-size:.5em;color:var(--gold-deep);opacity:0;animation:ink 1s ease 2.3s forwards}
+@keyframes write{to{clip-path:inset(0 0 0 0)}}
+@keyframes foil{to{background-position:-220% 0}}
+
+.seal p{color:var(--ink-soft);font-size:1.08rem;line-height:1.9;opacity:0;animation:ink 1.4s ease 3.6s forwards}
+.seal h2{font-family:var(--f-display);font-weight:400;font-size:1.7rem;color:var(--ink);opacity:0;animation:ink 1.4s ease 4s forwards}
+.open-btn{
+  margin-top:6px;opacity:0;animation:ink 1.2s ease 4.5s forwards;
+  font-family:var(--f-body);font-size:1.08rem;font-weight:700;color:var(--linen);
+  background:linear-gradient(135deg,#B8935A,var(--gold-deep));
+  border:1px solid var(--gold-pale);border-radius:999px;padding:12px 34px;cursor:pointer;
+  box-shadow:0 10px 30px rgba(122,91,50,.28), inset 0 1px 0 rgba(255,255,255,.35);
+  display:inline-flex;align-items:center;gap:10px;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.open-btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(122,91,50,.36), inset 0 1px 0 rgba(255,255,255,.35)}
+.open-btn:focus-visible,.music:focus-visible,.map-link:focus-visible,.credit a:focus-visible{outline:2px solid var(--gold-deep);outline-offset:4px}
+
+/* ---------- Music ---------- */
+.music{
+  position:fixed;z-index:60;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));
+  width:52px;height:52px;border-radius:50%;cursor:pointer;
+  background:rgba(251,247,240,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid var(--gold);color:var(--gold-deep);
+  display:grid;place-items:center;box-shadow:0 8px 24px rgba(122,91,50,.18);
+}
+.music .bars{display:flex;align-items:flex-end;gap:3px;height:18px}
+.music .bars span{width:3px;height:var(--h,8px);background:currentColor;border-radius:2px;transition:height .3s}
+.music.playing .bars span{animation:eq 1s ease-in-out infinite}
+.music.playing .bars span:nth-child(2){animation-delay:.2s}
+.music.playing .bars span:nth-child(3){animation-delay:.4s}
+.music.playing .bars span:nth-child(4){animation-delay:.1s}
+@keyframes eq{0%,100%{height:5px}50%{height:18px}}
+.music::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(169,132,79,.35)}
+
+/* ---------- Invitation ---------- */
+main{
+  position:relative;z-index:4;
+  width:min(600px,100%);margin:0 auto;
+  padding-inline:20px;padding-block:9vh 40px;
+  text-align:center;
+}
+section{padding-block:56px;display:grid;justify-items:center;gap:14px}
+.hero{padding-top:12px;gap:18px}
+
+.bismillah{font-family:'Scheherazade New','Amiri',serif;font-size:clamp(2.2rem,9vw,2.9rem);line-height:1.4;color:var(--ink)}
+.kin{font-size:1.05rem;color:var(--ink-soft);letter-spacing:.02em;word-spacing:.15em}
+.kicker{font-family:var(--f-display);font-size:1.3rem;color:var(--gold-deep)}
+.lede{font-size:1.18rem;color:var(--ink);line-height:2}
+.lede strong{font-family:var(--f-display);font-weight:700;font-size:1.25em;color:var(--gold-deep)}
+
+.names{
+  font-family:var(--f-display);font-weight:700;line-height:1.15;
+  font-size:clamp(3.6rem,16vw,5.6rem);
+  display:grid;justify-items:center;gap:0;margin-block:6px;
+}
+.names .n{
+  background:var(--foil);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:foil 9s linear infinite;padding-inline:.1em;
+}
+.names .amp{font-family:var(--f-script);font-weight:400;font-size:.62em;color:var(--gold-deep);line-height:1;margin-block:-.05em .12em}
+.latin-names{font-family:var(--f-script);font-size:clamp(1.6rem,6vw,2.1rem);color:var(--ink);letter-spacing:.06em;direction:ltr}
+.verse{font-size:1.22rem;line-height:2.1;color:var(--ink)}
+.night{font-family:var(--f-display);font-size:clamp(2rem,8vw,2.6rem);color:var(--gold-deep);line-height:1.4}
+
+.flourish{width:min(260px,70%);height:auto;color:var(--gold);display:block}
+
+/* date plate */
+.date-plate{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;
+  width:min(440px,100%);margin-top:8px;
+}
+.date-plate .side{
+  border-block:1px solid var(--gold);padding-block:8px;
+  font-size:1.15rem;color:var(--ink);line-height:1.5;
+}
+.date-plate .day{
+  font-family:var(--f-latin);font-weight:500;font-size:clamp(4rem,17vw,5.4rem);line-height:.9;
+  background:var(--foil);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:foil 9s linear infinite;
+}
+.year{font-family:var(--f-latin);font-size:1.3rem;letter-spacing:.5em;color:var(--gold-deep);direction:ltr;padding-left:.5em}
+.time-line{font-size:1.15rem;color:var(--ink-soft)}
+
+/* section heading */
+.eyebrow{font-family:var(--f-latin);font-size:.82rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);direction:ltr}
+.heading{font-family:var(--f-display);font-weight:400;font-size:clamp(1.5rem,6vw,1.95rem);color:var(--ink);text-wrap:balance;line-height:1.6}
+
+/* countdown */
+.count{display:flex;justify-content:center;margin-top:10px;direction:rtl}
+.count .u{display:grid;justify-items:center;padding-inline:clamp(12px,4.5vw,26px);position:relative}
+.count .u + .u::before{content:"";position:absolute;right:0;top:18%;height:56%;width:1px;background:linear-gradient(180deg,transparent,var(--gold),transparent)}
+.count .num{font-family:var(--f-latin);font-weight:500;font-size:clamp(2.2rem,9vw,3rem);line-height:1.1;color:var(--gold-deep);font-variant-numeric:tabular-nums lining-nums}
+.count .lbl{font-size:.92rem;color:var(--ink-soft)}
+.after{font-family:var(--f-display);font-size:1.6rem;color:var(--gold-deep)}
+
+/* details */
+.details{display:grid;grid-template-columns:1fr 1fr;width:100%;margin-top:14px}
+.d{display:grid;justify-items:center;align-content:start;gap:6px;padding:26px 10px;min-width:0}
+.d:nth-child(odd){border-left:1px solid rgba(169,132,79,.35)}
+.d:nth-child(-n+2){border-bottom:1px solid rgba(169,132,79,.35)}
+.d svg{width:34px;height:34px;color:var(--gold);margin-bottom:4px}
+.d .k{font-size:.95rem;color:var(--ink-soft)}
+.d .v{font-family:var(--f-display);font-size:1.32rem;color:var(--ink);line-height:1.5}
+.map-link{
+  margin-top:18px;display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  color:var(--gold-deep);font-weight:700;font-size:1.02rem;
+  border:1px solid var(--gold);border-radius:999px;padding:9px 26px;
+  background:rgba(251,247,240,.6);transition:background .3s, color .3s;
+}
+.map-link:hover{background:var(--gold-deep);color:var(--linen)}
+.map-link svg{width:18px;height:18px}
+
+/* quote */
+.quote{position:relative;padding-inline:8px}
+.quote blockquote{font-family:var(--f-display);font-size:clamp(1.45rem,5.6vw,1.9rem);line-height:1.9;color:var(--ink);text-wrap:balance}
+.quote .mark{font-family:var(--f-latin);font-size:5rem;line-height:.4;color:var(--gold-pale);height:.4em}
+.sig{font-family:var(--f-display);font-size:1.4rem;color:var(--gold-deep)}
+
+/* closing */
+.closing p{font-size:1.25rem;line-height:2.05}
+.closing .bless{font-family:var(--f-display);font-size:clamp(1.9rem,7vw,2.3rem);color:var(--gold-deep);margin-top:8px}
+.closing .fin{font-family:var(--f-latin);font-size:.9rem;letter-spacing:.5em;color:var(--gold);direction:ltr;padding-left:.5em}
+.closing .dt{font-family:var(--f-latin);font-size:1.15rem;letter-spacing:.3em;color:var(--ink);direction:ltr}
+
+.credit{padding-block:20px 96px;font-size:.95rem;color:var(--ink-soft)}
+.credit a{color:var(--gold-deep);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-inline-start:4px}
+.credit a:hover{text-decoration:underline}
+.credit svg{width:16px;height:16px}
+
+/* reveal: ink appearing line by line, like the film */
+.js main{opacity:0;transition:opacity 1.6s ease}
+.js main.visible{opacity:1}
+.js .rv{opacity:0;transform:translateY(12px);filter:blur(7px);transition:opacity 1.5s ease, transform 1.5s ease, filter 1.5s ease}
+.js .rv.in{opacity:1;transform:none;filter:none}
+
+@media (max-width:520px){
+  body{font-size:17px}
+  #bloom{width:44vw;opacity:.7}
+  #bloom-top{width:30vw;opacity:.55}
+  .sheer{width:38vw}
+  .d{padding:20px 6px}
+  .d .v{font-size:1.15rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .mono b{clip-path:none}
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- atmosphere -->
+<div class="wall" aria-hidden="true"></div>
+<div class="beams" aria-hidden="true"><div class="beam b1"></div><div class="beam b2"></div><div class="beam b3"></div></div>
+<canvas id="leaves" width="760" height="760" aria-hidden="true"></canvas>
+<div class="sheer" aria-hidden="true"></div>
+<canvas id="bloom" width="440" height="560" aria-hidden="true"></canvas>
+<canvas id="bloom-top" width="440" height="560" aria-hidden="true"></canvas>
+<canvas id="dust" aria-hidden="true"></canvas>
+
+<audio id="song" src="music.m4a" loop preload="auto" playsinline></audio>
+<button class="music" id="music" type="button" aria-label="تشغيل الموسيقى" aria-pressed="false">
+  <span class="bars"><span style="--h:7px"></span><span style="--h:14px"></span><span style="--h:10px"></span><span style="--h:16px"></span></span>
+</button>
+
+<!-- opening -->
+<div class="opening" id="opening">
+  <div class="drape l" aria-hidden="true"></div>
+  <div class="drape r" aria-hidden="true"></div>
+  <div class="seal">
+    <div class="date-type" id="date-type" aria-label="29 sep 2026"></div>
+    <div class="medallion">
+      <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#7A5B32"/><stop offset=".45" stop-color="#E9D6AE"/><stop offset="1" stop-color="#A9844F"/>
+          </linearGradient>
+        </defs>
+        <circle cx="100" cy="100" r="96" fill="none" stroke="url(#g)" stroke-width=".8"/>
+        <circle cx="100" cy="100" r="90" fill="none" stroke="url(#g)" stroke-width=".4" stroke-dasharray="1 3"/>
+        <circle cx="100" cy="100" r="84" fill="rgba(251,247,240,.55)" stroke="url(#g)" stroke-width=".6"/>
+        <g fill="#A9844F">
+          <path d="M100 1 l2.4 4 -2.4 4 -2.4 -4z"/><path d="M100 191 l2.4 4 -2.4 4 -2.4 -4z"/>
+          <path d="M1 100 l4 -2.4 4 2.4 -4 2.4z"/><path d="M191 100 l4 -2.4 4 2.4 -4 2.4z"/>
+        </g>
+      </svg>
+      <div class="mono" aria-label="س گ"><b>س</b><i>&amp;</i><b>گ</b></div>
+    </div>
+    <p>هناك لحظة واحدة<br>تستحق أن تُزاح لها الستائر...</p>
+    <h2>سمير &amp; گولناز</h2>
+    <button class="open-btn" id="open-btn" type="button">
+      <span>افتح الدعوة</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3c1.5 3.5 4 6 8 7-4 1-6.5 3.5-8 7-1.5-3.5-4-6-8-7 4-1 6.5-3.5 8-7z"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- invitation -->
+<main id="main">
+
+  <section class="hero">
+    <div class="bismillah rv">&#xFDFD;</div>
+    <div class="kin rv">عَائلة القُرب ... صُحبة العُمر ... أحباب الرُّوح</div>
+
+    <svg class="flourish rv" viewBox="0 0 260 24" fill="none" stroke="currentColor" aria-hidden="true">
+      <path d="M2 12 H100" stroke-width=".8"/><path d="M160 12 H258" stroke-width=".8"/>
+      <path d="M130 3 l9 9 -9 9 -9 -9z" stroke-width="1"/><circle cx="130" cy="12" r="2.2" fill="currentColor"/>
+      <circle cx="110" cy="12" r="1.4" fill="currentColor"/><circle cx="150" cy="12" r="1.4" fill="currentColor"/>
+    </svg>
+
+    <div class="kicker rv">دعوة زواج</div>
+    <div class="lede rv">«بسم الله نبدأ أجمل فصول العمر»</div>
+    <div class="lede rv">يتشرّف السيد <strong>خيري قاسم</strong><br>بدعوتكم لحضور حفل زفاف ابنه</div>
+
+    <h1 class="names rv" aria-label="سمير و گولناز">
+      <span class="n">سمير</span>
+      <span class="amp">&amp;</span>
+      <span class="n">گولناز</span>
+    </h1>
+    <div class="latin-names rv">Samir &amp; Golnaz</div>
+
+    <div class="verse rv">نُقاسمكم سرورنا وجميل شعورنا<br>بكلّ حبٍّ نتشرّف بدعوتكم لمشاركتنا</div>
+    <div class="night rv">لَيلة عُمرنا</div>
+  </section>
+
+  <section>
+    <div class="eyebrow rv">The Date</div>
+    <div class="date-plate rv">
+      <div class="side">الثلاثاء</div>
+      <div class="day">29</div>
+      <div class="side">سبتمبر</div>
+    </div>
+    <div class="year rv">2026</div>
+    <div class="time-line rv">الساعة 3:00 مساءً</div>
+  </section>
+
+  <section id="countdown">
+    <div class="eyebrow rv">Countdown</div>
+    <h2 class="heading rv" id="count-title">نقترب من لحظةٍ ستبقى في الذاكرة...</h2>
+    <div class="count rv" id="count">
+      <div class="u"><span class="num" id="cd-d">00</span><span class="lbl">يوم</span></div>
+      <div class="u"><span class="num" id="cd-h">00</span><span class="lbl">ساعة</span></div>
+      <div class="u"><span class="num" id="cd-m">00</span><span class="lbl">دقيقة</span></div>
+      <div class="u"><span class="num" id="cd-s">00</span><span class="lbl">ثانية</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow rv">The Evening</div>
+    <h2 class="heading rv">تفاصيل الليلة</h2>
+    <div class="details">
+      <div class="d rv">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M16 29s-9-8.6-9-15.5a9 9 0 0 1 18 0C25 20.4 16 29 16 29z"/><circle cx="16" cy="13.5" r="3.4"/></svg>
+        <div class="k">المكان</div>
+        <div class="v">قاعة خملين الملكية</div>
+      </div>
+      <div class="d rv">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="16" cy="16" r="12.5"/><circle cx="16" cy="16" r="10" stroke-dasharray="1 2.6"/><path d="M16 9v7l4.5 3"/></svg>
+        <div class="k">الوقت</div>
+        <div class="v">3:00 مساءً</div>
+      </div>
+      <div class="d rv">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="11" y="3" width="10" height="16" rx="5"/><path d="M7 15a9 9 0 0 0 18 0M16 24v5M11 29h10"/><path d="M11 9h3M11 13h3" stroke-width=".9"/></svg>
+        <div class="k">الفنان</div>
+        <div class="v">شاكر حلو</div>
+      </div>
+      <div class="d rv">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 10.5h5.5L12 7h8l2.5 3.5H28V26H4z"/><circle cx="16" cy="17.5" r="5.2"/><circle cx="16" cy="17.5" r="2.4"/></svg>
+        <div class="k">التصوير</div>
+        <div class="v">أجيال</div>
+      </div>
+    </div>
+    <a class="map-link rv" id="map-link" target="_blank" rel="noopener noreferrer"
+       href="https://www.google.com/maps/search/?api=1&amp;query=%D9%82%D8%A7%D8%B9%D8%A9%20%D8%AE%D9%85%D9%84%D9%8A%D9%86%20%D8%A7%D9%84%D9%85%D9%84%D9%83%D9%8A%D8%A9">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg>
+      الموقع على الخريطة
+    </a>
+  </section>
+
+  <section class="quote">
+    <div class="mark rv" aria-hidden="true">&ldquo;</div>
+    <blockquote class="rv">حين يلتقي قلبان على موعدٍ واحد،<br>تبدأ حكايةٌ لا تشبه سواها.</blockquote>
+    <div class="sig rv">سمير &amp; گولناز</div>
+  </section>
+
+  <section class="closing">
+    <svg class="flourish rv" viewBox="0 0 260 24" fill="none" stroke="currentColor" aria-hidden="true">
+      <path d="M2 12 H100" stroke-width=".8"/><path d="M160 12 H258" stroke-width=".8"/>
+      <path d="M130 3 l9 9 -9 9 -9 -9z" stroke-width="1"/><circle cx="130" cy="12" r="2.2" fill="currentColor"/>
+    </svg>
+    <p class="rv">حضوركم هو اللمسة التي تكتمل بها فرحتنا،<br>وبكم تصبح هذه الليلة ذكرى لا تُنسى.</p>
+    <div class="sig rv">سمير &amp; گولناز</div>
+    <div class="dt rv">29 . 09 . 2026</div>
+    <div class="bless rv">دامت الأفراح</div>
+    <div class="fin rv">OUR STORY BEGINS HERE</div>
+  </section>
+
+  <footer class="credit">
+    جميع الحقوق محفوظة لدى
+    <a href="https://www.instagram.com/neon.digital.iq" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      نيون ديجيتال
+    </a>
+  </footer>
+</main>
+
+<script>
+document.documentElement.classList.add('js');
+
+/* ---- event settings ---- */
+const EVENT_DATE = new Date('2026-09-29T15:00:00+03:00');
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* seeded random so the drawings look the same on every visit */
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+
+function hiDPI(cv){
+  const w=cv.width,h=cv.height,r=Math.min(window.devicePixelRatio||1,2);
+  cv.width=w*r;cv.height=h*r;const c=cv.getContext('2d');c.scale(r,r);return {c,w,h};
+}
+
+/* ---- leaf shadows on the wall ---- */
+(function(){
+  const {c}=hiDPI(document.getElementById('leaves'));const R=rng(7);
+  c.fillStyle='rgba(92,72,50,.22)';c.strokeStyle='rgba(92,72,50,.22)';
+  function leaf(x,y,a,len){
+    c.save();c.translate(x,y);c.rotate(a);c.beginPath();
+    c.moveTo(0,0);c.quadraticCurveTo(len*.5,-len*.24,len,0);c.quadraticCurveTo(len*.5,len*.24,0,0);
+    c.fill();c.restore();
+  }
+  function branch(x,y,a,len,depth,w){
+    const steps=18;let px=x,py=y;const bend=(R()-.5)*.6;
+    for(let i=1;i<=steps;i++){
+      const t=i/steps,ang=a+bend*t;const nx=px+Math.cos(ang)*len/steps,ny=py+Math.sin(ang)*len/steps;
+      c.lineWidth=w*(1-t*.7);c.beginPath();c.moveTo(px,py);c.lineTo(nx,ny);c.stroke();
+      if(i>3 && i%2===0){
+        const side=(i/2)%2?1:-1;
+        leaf(nx,ny,ang+side*(0.7+R()*.4),18+R()*20*(1-t*.4));
+      }
+      if(depth>0 && i===Math.floor(steps*(.35+R()*.3))) branch(nx,ny,ang+(R()>.5?1:-1)*(.5+R()*.5),len*.55,depth-1,w*.6);
+      px=nx;py=ny;
+    }
+    leaf(px,py,a+bend,26);
+  }
+  branch(0,40,0.55,620,2,5);branch(30,0,1.05,520,2,4);branch(0,260,0.2,420,1,3);
+})();
+
+/* ---- flowering branch in the corner ---- */
+function drawBloom(id,seed){
+  const {c,w,h}=hiDPI(document.getElementById(id));const R=rng(seed);
+  const stems=[];
+  for(let s=0;s<7;s++){
+    const sx=w-20-R()*90,sy=h+5;const ang=-Math.PI/2-.25-R()*.75;const len=260+R()*230;
+    const cx=sx+Math.cos(ang)*len*.5+(R()-.5)*80,cy=sy+Math.sin(ang)*len*.5;
+    const ex=sx+Math.cos(ang)*len,ey=sy+Math.sin(ang)*len;
+    stems.push([sx,sy,cx,cy,ex,ey]);
+  }
+  const q=(p,t)=>{const u=1-t;return[u*u*p[0]+2*u*t*p[2]+t*t*p[4],u*u*p[1]+2*u*t*p[3]+t*t*p[5]]};
+  // stems
+  c.strokeStyle='rgba(110,92,62,.75)';c.lineCap='round';
+  stems.forEach(p=>{c.lineWidth=1.6;c.beginPath();c.moveTo(p[0],p[1]);c.quadraticCurveTo(p[2],p[3],p[4],p[5]);c.stroke()});
+  // leaves
+  stems.forEach(p=>{
+    for(let i=0;i<22;i++){
+      const t=.12+R()*.88,[x,y]=q(p,t);const a=-Math.PI/2+(R()-.5)*2.6;const l=10+R()*16;
+      c.save();c.translate(x,y);c.rotate(a);
+      const g=c.createLinearGradient(0,0,l,0);g.addColorStop(0,'rgba(104,108,78,.85)');g.addColorStop(1,'rgba(150,150,112,.7)');
+      c.fillStyle=g;c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(l*.5,-l*.3,l,0);c.quadraticCurveTo(l*.5,l*.3,0,0);c.fill();
+      c.restore();
+    }
+  });
+  // blossoms
+  function flower(x,y,r,rot){
+    c.save();c.translate(x,y);c.rotate(rot);
+    for(let k=0;k<5;k++){
+      c.save();c.rotate(k*Math.PI*2/5);
+      const g=c.createRadialGradient(0,-r*.55,1,0,-r*.55,r);
+      g.addColorStop(0,'#FFFBF4');g.addColorStop(.7,'#F3E4CF');g.addColorStop(1,'#DCC2A0');
+      c.fillStyle=g;c.strokeStyle='rgba(150,112,72,.55)';c.lineWidth=.7;
+      c.beginPath();c.moveTo(0,0);
+      c.bezierCurveTo(-r*.62,-r*.25,-r*.55,-r*1.02,0,-r*.98);
+      c.bezierCurveTo(r*.55,-r*1.02,r*.62,-r*.25,0,0);
+      c.fill();c.stroke();c.restore();
+    }
+    c.fillStyle='#B98A4B';c.beginPath();c.arc(0,0,r*.2,0,7);c.fill();
+    c.fillStyle='#7A5B32';
+    for(let k=0;k<7;k++){const a=k/7*7,d=r*.28;c.beginPath();c.arc(Math.cos(a)*d,Math.sin(a)*d,.9,0,7);c.fill()}
+    c.restore();
+  }
+  function bud(x,y,r){c.fillStyle='#EBD9BE';c.strokeStyle='rgba(150,112,72,.5)';c.beginPath();c.arc(x,y,r,0,7);c.fill();c.stroke()}
+  stems.forEach(p=>{
+    for(let i=0;i<5;i++){const t=.45+R()*.55,[x,y]=q(p,t);flower(x+(R()-.5)*30,y+(R()-.5)*20,9+R()*12,R()*6)}
+    for(let i=0;i<4;i++){const t=.3+R()*.7,[x,y]=q(p,t);bud(x+(R()-.5)*26,y,2.2+R()*2.2)}
+  });
+  // big blooms near the base
+  for(let i=0;i<6;i++) flower(w-30-R()*150,h-30-R()*150,18+R()*12,R()*6);
+}
+drawBloom('bloom',21);drawBloom('bloom-top',5);
+
+/* ---- gold dust drifting through the light ---- */
+(function(){
+  const cv=document.getElementById('dust'),c=cv.getContext('2d');let W,H;const R=Math.random;
+  function size(){W=cv.width=innerWidth;H=cv.height=innerHeight}size();addEventListener('resize',size);
+  const ps=Array.from({length:46},()=>({x:R()*innerWidth,y:R()*innerHeight,r:R()*1.6+.4,vy:-(R()*.25+.05),vx:(R()-.5)*.18,p:R()*6.28}));
+  function frame(){
+    c.clearRect(0,0,W,H);
+    for(const d of ps){
+      d.x+=d.vx;d.y+=d.vy;d.p+=.02;if(d.y<-5){d.y=H+5;d.x=R()*W}
+      const a=.35+Math.sin(d.p)*.3;
+      c.fillStyle=`rgba(190,150,90,${a})`;c.beginPath();c.arc(d.x,d.y,d.r,0,7);c.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  if(!reduceMotion) frame();
+})();
+
+/* ---- date typed in, as in the film ---- */
+(function(){
+  const el=document.getElementById('date-type');const txt='29 . sep . 2026';
+  [...txt].forEach((ch,i)=>{const s=document.createElement('span');s.textContent=ch===' '?' ':ch;s.style.animationDelay=(.3+i*.08)+'s';el.appendChild(s)});
+})();
+
+/* ---- music ---- */
+const song=document.getElementById('song'),musicBtn=document.getElementById('music');
+function setPlaying(on){musicBtn.classList.toggle('playing',on);musicBtn.setAttribute('aria-pressed',on);musicBtn.setAttribute('aria-label',on?'إيقاف الموسيقى':'تشغيل الموسيقى')}
+function play(){song.play().then(()=>setPlaying(true)).catch(()=>setPlaying(false))}
+musicBtn.addEventListener('click',()=>{song.paused?play():(song.pause(),setPlaying(false))});
+
+/* ---- reveal ---- */
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(!e.isIntersecting)return;
+    const sib=[...e.target.parentElement.querySelectorAll(':scope > .rv')];
+    const idx=Math.max(0,sib.indexOf(e.target));
+    e.target.style.transitionDelay=(Math.min(idx,8)*.22)+'s';
+    e.target.classList.add('in');io.unobserve(e.target);});
+},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+
+/* ---- opening the curtains ---- */
+const opening=document.getElementById('opening'),main=document.getElementById('main');
+document.getElementById('open-btn').addEventListener('click',()=>{
+  opening.classList.add('open');play();
+  setTimeout(()=>{main.classList.add('visible');document.body.classList.remove('locked');document.querySelectorAll('.rv').forEach(el=>io.observe(el))},900);
+  setTimeout(()=>opening.classList.add('gone'),2600);
+});
+
+/* ---- countdown ---- */
+(function(){
+  const ids=['cd-d','cd-h','cd-m','cd-s'].map(i=>document.getElementById(i));
+  function tick(){
+    let d=EVENT_DATE-Date.now();
+    if(d<=0){
+      document.getElementById('count-title').textContent='اليوم تبدأ حكايتنا';
+      document.getElementById('count').hidden=true;return false;
+    }
+    const v=[Math.floor(d/864e5),Math.floor(d/36e5)%24,Math.floor(d/6e4)%60,Math.floor(d/1e3)%60];
+    ids.forEach((el,i)=>el.textContent=String(v[i]).padStart(2,'0'));return true;
+  }
+  if(tick()){const t=setInterval(()=>{if(!tick())clearInterval(t)},1000)}
+})();
+</script>
+</body>
+</html>
