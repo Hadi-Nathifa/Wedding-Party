@@ -6,6 +6,8 @@
 <title>راهبة & أيمن</title>
 <meta name="description" content="دعوة زفاف راهبة & أيمن — السبت 17 أكتوبر 2026، قاعة سنوني للحفلات">
 <meta name="theme-color" content="#F6EFE3">
+<meta property="og:title" content="راهبة & أيمن — دعوة زفاف">
+<meta property="og:description" content="السبت 17 أكتوبر 2026 • 6:00 مساءً • قاعة سنوني للحفلات">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
@@ -267,6 +269,49 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
 .closing .dt{font-family:var(--f-latin);font-size:1.15rem;letter-spacing:.3em;color:var(--ink);direction:ltr}
 
 .credit{padding-block:20px 96px;font-size:.95rem;color:var(--ink-soft)}
+
+/* personal guest line on the opening card */
+.guest{font-size:1.02rem;color:var(--ink-soft);line-height:1.6;opacity:0;animation:ink 1.2s ease .2s forwards}
+.guest b{display:block;font-family:var(--f-display);font-size:1.45rem;font-weight:700;color:var(--gold-deep)}
+
+/* Quran verse */
+.ayah{font-family:'Amiri',serif;font-size:clamp(1.18rem,4.6vw,1.38rem);line-height:2.2;color:var(--ink);max-width:30em;text-wrap:balance}
+.ayah-ref{font-size:.92rem;color:var(--gold)}
+
+/* pill actions: calendar, share */
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:10px}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;text-decoration:none;
+  font-family:var(--f-body);font-size:.98rem;font-weight:700;color:var(--gold-deep);
+  border:1px solid var(--gold);border-radius:999px;padding:8px 20px;background:rgba(251,247,240,.6);
+  transition:background .3s,color .3s;
+}
+.pill:hover{background:var(--gold-deep);color:var(--linen)}
+.pill:focus-visible{outline:2px solid var(--gold-deep);outline-offset:4px}
+.pill svg{width:17px;height:17px}
+
+/* countdown tick */
+.num.tick{animation:tick .6s ease}
+@keyframes tick{0%{opacity:.25;transform:translateY(-6px);filter:blur(2px)}100%{opacity:1;transform:none;filter:none}}
+
+/* scroll cue */
+.cue{
+  position:fixed;z-index:6;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  display:grid;justify-items:center;gap:2px;color:var(--gold-deep);font-size:.85rem;pointer-events:none;
+  opacity:0;transition:opacity .8s ease;
+}
+.cue.show{opacity:.85}
+.cue svg{width:20px;height:20px;animation:nudge 1.8s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* toast */
+.toast{
+  position:fixed;z-index:70;left:50%;bottom:calc(86px + env(safe-area-inset-bottom,0px));transform:translate(-50%,10px);
+  background:var(--ink);color:var(--linen);font-size:.95rem;padding:8px 20px;border-radius:999px;
+  opacity:0;transition:opacity .4s,transform .4s;pointer-events:none;
+}
+.toast.show{opacity:.92;transform:translate(-50%,0)}
+#burst{position:fixed;inset:0;width:100%;height:100%;z-index:55;pointer-events:none}
 .credit a{color:var(--gold-deep);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-inline-start:4px}
 .credit a:hover{text-decoration:underline}
 .credit svg{width:16px;height:16px}
@@ -301,6 +346,9 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
 <canvas id="bloom" width="440" height="560" aria-hidden="true"></canvas>
 <canvas id="bloom-top" width="440" height="560" aria-hidden="true"></canvas>
 <canvas id="dust" aria-hidden="true"></canvas>
+<canvas id="burst" aria-hidden="true"></canvas>
+<div class="cue" id="cue" aria-hidden="true">مرّر للأسفل<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <audio id="song" src="music.m4a" loop preload="auto" playsinline></audio>
 <button class="music" id="music" type="button" aria-label="تشغيل الموسيقى" aria-pressed="false">
@@ -312,6 +360,7 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
   <div class="drape l" aria-hidden="true"></div>
   <div class="drape r" aria-hidden="true"></div>
   <div class="seal">
+    <div class="guest" id="guest" hidden>دعوة خاصة إلى<b id="guest-name"></b></div>
     <div class="date-type" id="date-type" aria-label="17 oct 2026"></div>
     <div class="medallion">
       <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
@@ -344,6 +393,8 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
 
   <section class="hero">
     <div class="bismillah rv">&#xFDFD;</div>
+    <p class="ayah rv">﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾</p>
+    <div class="ayah-ref rv">سورة الروم — الآية 21</div>
     <div class="kin rv">عَائلة القُرب ... صُحبة العُمر ... أحباب الرُّوح</div>
 
     <svg class="flourish rv" viewBox="0 0 260 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -376,6 +427,17 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
     </div>
     <div class="year rv">2026</div>
     <div class="time-line rv">الساعة 6:00 مساءً</div>
+    <div class="actions rv">
+      <a class="pill" id="cal-google" target="_blank" rel="noopener noreferrer"
+         href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%D8%B2%D9%81%D8%A7%D9%81%20%D8%B1%D8%A7%D9%87%D8%A8%D8%A9%20%26%20%D8%A3%D9%8A%D9%85%D9%86&amp;dates=20261017T150000Z/20261017T200000Z&amp;location=%D9%82%D8%A7%D8%B9%D8%A9%20%D8%B3%D9%86%D9%88%D9%86%D9%8A%20%D9%84%D9%84%D8%AD%D9%81%D9%84%D8%A7%D8%AA&amp;details=https%3A%2F%2Fmaps.app.goo.gl%2FFGuvR81DcYF4pGHw9">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg>
+        أضف إلى تقويم Google
+      </a>
+      <button class="pill" id="cal-ics" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg>
+        تقويم iPhone
+      </button>
+    </div>
   </section>
 
   <section id="countdown">
@@ -438,6 +500,12 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
     <div class="dt rv">17 . 10 . 2026</div>
     <div class="bless rv">دامت الأفراح</div>
     <div class="fin rv">OUR STORY BEGINS HERE</div>
+    <div class="actions rv">
+      <button class="pill" id="share" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="M8.2 10.8l7.6-4.1M8.2 13.2l7.6 4.1"/></svg>
+        شارك الدعوة
+      </button>
+    </div>
   </section>
 
   <footer class="credit">
@@ -580,10 +648,69 @@ const io=new IntersectionObserver(es=>{
     e.target.classList.add('in');io.unobserve(e.target);});
 },{threshold:.15,rootMargin:'0px 0px -6% 0px'});
 
+/* ---- guest name: add ?to=الاسم to the link ---- */
+(function(){
+  let name='';try{name=(new URLSearchParams(location.search).get('to')||'').trim().slice(0,40)}catch(e){}
+  if(name){document.getElementById('guest-name').textContent=name;document.getElementById('guest').hidden=false}
+})();
+
+/* ---- gold petals released when the curtains open ---- */
+function burst(){
+  if(reduceMotion)return;
+  const cv=document.getElementById('burst'),c=cv.getContext('2d');
+  const W=cv.width=innerWidth,H=cv.height=innerHeight;const R=Math.random;
+  const cols=['#C9A56A','#E9D6AE','#FFF8EC','#A9844F','#F3E4CF'];
+  const ps=Array.from({length:Math.min(110,Math.round(W/4))},()=>({
+    x:W/2+(R()-.5)*W*.5,y:-20-R()*H*.4,vx:(R()-.5)*1.6,vy:1+R()*2.2,
+    r:4+R()*6,a:R()*6.28,va:(R()-.5)*.12,w:R()*6.28,col:cols[R()*cols.length|0]}));
+  const t0=performance.now();
+  (function f(t){
+    const el=t-t0;c.clearRect(0,0,W,H);
+    for(const p of ps){
+      p.w+=.05;p.x+=p.vx+Math.sin(p.w)*.8;p.y+=p.vy;p.a+=p.va;
+      c.save();c.translate(p.x,p.y);c.rotate(p.a);c.scale(1,Math.abs(Math.sin(p.w))*.6+.4);
+      c.globalAlpha=Math.max(0,1-el/7000);c.fillStyle=p.col;
+      c.beginPath();c.ellipse(0,0,p.r,p.r*.55,0,0,7);c.fill();c.restore();
+    }
+    if(el<7000)requestAnimationFrame(f);else c.clearRect(0,0,W,H);
+  })(t0);
+}
+
+/* ---- small helpers ---- */
+const cue=document.getElementById('cue'),toastEl=document.getElementById('toast');
+addEventListener('scroll',()=>{if(scrollY>40)cue.classList.remove('show')},{passive:true});
+function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>toastEl.classList.remove('show'),2400)}
+
+/* ---- calendar file for iPhone / Outlook ---- */
+document.getElementById('cal-ics').addEventListener('click',()=>{
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Rahiba-Ayman//Invitation//AR','BEGIN:VEVENT',
+    'UID:rahiba-ayman-20261017@invitation','DTSTAMP:20261007T000000Z',
+    'DTSTART:20261017T150000Z','DTEND:20261017T200000Z',
+    'SUMMARY:زفاف راهبة & أيمن','LOCATION:قاعة سنوني للحفلات',
+    'DESCRIPTION:https://maps.app.goo.gl/FGuvR81DcYF4pGHw9',
+    'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:غداً زفاف راهبة & أيمن','END:VALARM',
+    'END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));
+  a.download='rahiba-ayman.ics';document.body.appendChild(a);a.click();a.remove();
+  toast('تم تجهيز موعد الحفل للتقويم');
+});
+
+/* ---- share ---- */
+document.getElementById('share').addEventListener('click',async()=>{
+  const url=location.href.split('?')[0].split('#')[0];
+  const data={title:'راهبة & أيمن',text:'دعوة زفاف راهبة & أيمن — السبت 17 أكتوبر 2026',url};
+  try{
+    if(navigator.share && /^https?:/.test(url)){await navigator.share(data);return}
+    await navigator.clipboard.writeText(url);toast('تم نسخ رابط الدعوة');
+  }catch(e){if(e&&e.name!=='AbortError')toast('انسخ الرابط من شريط المتصفح')}
+});
+
 /* ---- opening the curtains ---- */
 const opening=document.getElementById('opening'),main=document.getElementById('main');
 document.getElementById('open-btn').addEventListener('click',()=>{
-  opening.classList.add('open');play();
+  opening.classList.add('open');play();burst();
+  setTimeout(()=>{if(scrollY<40)cue.classList.add('show')},4200);
   setTimeout(()=>{main.classList.add('visible');document.body.classList.remove('locked');document.querySelectorAll('.rv').forEach(el=>io.observe(el))},900);
   setTimeout(()=>opening.classList.add('gone'),2600);
 });
@@ -598,7 +725,7 @@ document.getElementById('open-btn').addEventListener('click',()=>{
       document.getElementById('count').hidden=true;return false;
     }
     const v=[Math.floor(d/864e5),Math.floor(d/36e5)%24,Math.floor(d/6e4)%60,Math.floor(d/1e3)%60];
-    ids.forEach((el,i)=>el.textContent=String(v[i]).padStart(2,'0'));return true;
+    ids.forEach((el,i)=>{const t=String(v[i]).padStart(2,'0');if(el.textContent!==t){el.textContent=t;el.classList.remove('tick');void el.offsetWidth;el.classList.add('tick')}});return true;
   }
   if(tick()){const t=setInterval(()=>{if(!tick())clearInterval(t)},1000)}
 })();
