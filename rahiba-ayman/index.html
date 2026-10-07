@@ -47,14 +47,15 @@ body.locked{overflow:hidden;height:100vh}
 /* ---------- Scene: the painted lake (fixed layers) ---------- */
 .scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#CFC3AE}
 .scene-blur{ /* fills wide screens around the painting */
-  position:absolute;inset:-40px;background:url(lake.jpg) center/cover no-repeat;
-  filter:blur(28px) saturate(.9);opacity:.85;
+  display:none;position:absolute;inset:-40px;background:url(lake.jpg) center/cover no-repeat;
+  filter:blur(22px) saturate(.9);opacity:.85;
 }
 .art{ /* the painting, sized like "cover" on phones */
   position:absolute;left:50%;top:50%;transform:translate(-54%,-50%); /* keeps the swans in view on narrow phones */
   width:max(100vw,56.25vh);height:max(100vh,177.78vw);
 }
 @media (min-aspect-ratio:3/4){ /* tablets landscape & desktop: framed portrait painting */
+  .scene-blur{display:block}
   .art{width:56.25vh;height:100vh;transform:translate(-50%,-50%);
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
             mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
@@ -67,7 +68,7 @@ body.locked{overflow:hidden;height:100vh}
 .shimmer{
   position:absolute;left:8%;right:4%;top:60%;bottom:4%;
   background:repeating-linear-gradient(180deg,rgba(255,250,236,0) 0 7px,rgba(255,250,236,.55) 8px,rgba(255,250,236,0) 10px);
-  background-size:100% 23px;mix-blend-mode:screen;opacity:.35;
+  background-size:100% 23px;opacity:.3;
   -webkit-mask-image:radial-gradient(60% 55% at 52% 40%,#000,transparent 75%);
           mask-image:radial-gradient(60% 55% at 52% 40%,#000,transparent 75%);
   animation:ripple 7s linear infinite, glint 5s ease-in-out infinite;
@@ -88,7 +89,7 @@ body.locked{overflow:hidden;height:100vh}
 .mist{
   position:absolute;left:-30%;width:160%;top:49%;height:12%;
   background:radial-gradient(50% 50% at 50% 50%,rgba(250,244,232,.75),transparent 70%);
-  filter:blur(10px);animation:mist 26s ease-in-out infinite alternate;
+  animation:mist 26s ease-in-out infinite alternate;
 }
 @keyframes mist{from{transform:translateX(-8%)}to{transform:translateX(8%)}}
 
@@ -101,7 +102,7 @@ body.locked{overflow:hidden;height:100vh}
 @keyframes flap{from{transform:scaleY(1)}to{transform:scaleY(.35)}}
 
 /* old-canvas grain + soft vignette tie everything to the painting */
-.grain{position:absolute;inset:0;opacity:.13;mix-blend-mode:multiply}
+.grain{position:absolute;inset:0;opacity:.5}
 .vignette{position:absolute;inset:0;box-shadow:inset 0 0 160px rgba(60,44,28,.35)}
 
 #dust{position:fixed;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
@@ -130,8 +131,7 @@ body.locked{overflow:hidden;height:100vh}
 .seal{
   position:relative;z-index:1;text-align:center;display:grid;justify-items:center;gap:8px;
   width:min(320px,100%);padding:40px 20px 20px;
-  background:linear-gradient(180deg,rgba(250,245,236,.70),rgba(246,239,227,.58));
-  -webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);
+  background:linear-gradient(180deg,rgba(250,245,236,.84),rgba(246,239,227,.74));
   border:1px solid rgba(169,132,79,.55);border-radius:190px 190px 22px 22px;
   box-shadow:0 30px 80px rgba(50,36,22,.30), inset 0 0 0 6px rgba(250,245,236,.35), inset 0 0 0 7px rgba(169,132,79,.30);
   transition:opacity 1.1s ease, transform 1.4s ease, filter 1.1s ease;
@@ -183,7 +183,7 @@ body.locked{overflow:hidden;height:100vh}
 .music{
   position:fixed;z-index:60;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));
   width:52px;height:52px;border-radius:50%;cursor:pointer;
-  background:rgba(251,247,240,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  background:rgba(251,247,240,.92);
   border:1px solid var(--gold);color:var(--gold-deep);
   display:grid;place-items:center;box-shadow:0 8px 24px rgba(122,91,50,.18);
 }
@@ -205,8 +205,7 @@ main{
 }
 main::before{ /* a veil of mist the text sits on, fading out at the edges so the painting shows */
   content:"";position:absolute;inset:0 -6px;z-index:-1;
-  background:rgba(247,241,230,.74);
-  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+  background:rgba(247,241,230,.82);
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(180deg,transparent,#000 160px);
   -webkit-mask-composite:source-in;
           mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(180deg,transparent,#000 160px);
@@ -345,8 +344,8 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
 /* reveal: ink appearing line by line, like the film */
 .js main{opacity:0;transition:opacity 1.6s ease}
 .js main.visible{opacity:1}
-.js .rv{opacity:0;transform:translateY(12px);filter:blur(7px);transition:opacity 1.5s ease, transform 1.5s ease, filter 1.5s ease}
-.js .rv.in{opacity:1;transform:none;filter:none}
+.js .rv{opacity:0;transform:translateY(12px);transition:opacity 1.5s ease, transform 1.5s ease}
+.js .rv.in{opacity:1;transform:none}
 
 @media (max-width:520px){
   body{font-size:17px}
@@ -418,6 +417,17 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
 </div>
 
 <!-- invitation -->
+<noscript><style>.opening{display:none}body.locked{overflow:auto;height:auto}</style></noscript>
+<script>
+/* safety net: if anything stops the opening animation, still show the invitation */
+document.getElementById('open-btn').addEventListener('click',function(){
+  setTimeout(function(){
+    var o=document.getElementById('opening');
+    if(o && !o.classList.contains('open')){o.style.display='none';document.body.classList.remove('locked');document.documentElement.classList.remove('js');}
+  },1200);
+});
+</script>
+
 <main id="main">
 
   <section class="hero">
@@ -554,7 +564,7 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* ---- canvas grain, like an old oil painting ---- */
 (function(){
   const cv=document.getElementById('grain'),c=cv.getContext('2d'),img=c.createImageData(160,160);
-  for(let i=0;i<img.data.length;i+=4){const v=150+Math.random()*105|0;img.data[i]=v;img.data[i+1]=v-6;img.data[i+2]=v-16;img.data[i+3]=255}
+  for(let i=0;i<img.data.length;i+=4){img.data[i]=70;img.data[i+1]=54;img.data[i+2]=36;img.data[i+3]=Math.random()*46|0}
   c.putImageData(img,0,0);
   const d=document.createElement('div');d.className='grain';
   d.style.background='url('+cv.toDataURL()+')';cv.replaceWith(d);
