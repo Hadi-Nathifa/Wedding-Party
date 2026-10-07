@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>سمير & گولناز</title>
-<meta name="description" content="دعوة زفاف سمير & گولناز — الثلاثاء 29 سبتمبر 2026، قاعة خملين الملكية">
+<title>راهبة & أيمن</title>
+<meta name="description" content="دعوة زفاف راهبة & أيمن — السبت 17 أكتوبر 2026، قاعة سنوني للحفلات">
 <meta name="theme-color" content="#F6EFE3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -127,20 +127,20 @@ body.locked{overflow:hidden;height:100vh}
 .medallion svg.ring{position:absolute;inset:0;width:100%;height:100%;animation:turn 60s linear infinite}
 @keyframes turn{to{transform:rotate(360deg)}}
 .mono{
-  display:flex;align-items:center;gap:.08em;direction:rtl;
-  font-family:var(--f-display);font-size:clamp(4.2rem,17vw,5.6rem);line-height:1;
+  display:grid;justify-items:center;direction:ltr;
+  font-family:var(--f-script);font-size:clamp(2.6rem,11vw,3.3rem);line-height:1.05;
 }
 .mono b{
-  font-weight:700;background:var(--foil);background-size:220% 100%;
+  font-weight:400;background:var(--foil);background-size:220% 100%;
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  clip-path:inset(0 0 0 100%);
+  clip-path:inset(-20% 100% -20% -10%);
   animation:write 1.6s cubic-bezier(.55,.1,.3,1) forwards, foil 7s linear infinite;
-  padding:.18em .06em;
+  padding:.12em .22em;
 }
 .mono b:nth-child(1){animation-delay:1.6s,0s}
 .mono b:nth-child(3){animation-delay:2.6s,0s}
-.mono i{font-style:normal;font-family:var(--f-script);font-size:.5em;color:var(--gold-deep);opacity:0;animation:ink 1s ease 2.3s forwards}
-@keyframes write{to{clip-path:inset(0 0 0 0)}}
+.mono i{font-style:normal;font-size:.6em;line-height:.8;color:var(--gold-deep);opacity:0;animation:ink 1s ease 2.3s forwards}
+@keyframes write{to{clip-path:inset(-20% -10% -20% -10%)}}
 @keyframes foil{to{background-position:-220% 0}}
 
 .seal p{color:var(--ink-soft);font-size:1.08rem;line-height:1.9;opacity:0;animation:ink 1.4s ease 3.6s forwards}
@@ -243,6 +243,7 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
 .d:nth-child(-n+2){border-bottom:1px solid rgba(169,132,79,.35)}
 .d svg{width:34px;height:34px;color:var(--gold);margin-bottom:4px}
 .d .k{font-size:.95rem;color:var(--ink-soft)}
+.d .logo{width:42px;height:auto;opacity:.9}
 .d .v{font-family:var(--f-display);font-size:1.32rem;color:var(--ink);line-height:1.5}
 .map-link{
   margin-top:18px;display:inline-flex;align-items:center;gap:10px;text-decoration:none;
@@ -311,7 +312,7 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
   <div class="drape l" aria-hidden="true"></div>
   <div class="drape r" aria-hidden="true"></div>
   <div class="seal">
-    <div class="date-type" id="date-type" aria-label="29 sep 2026"></div>
+    <div class="date-type" id="date-type" aria-label="17 oct 2026"></div>
     <div class="medallion">
       <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
         <defs>
@@ -327,10 +328,10 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
           <path d="M1 100 l4 -2.4 4 2.4 -4 2.4z"/><path d="M191 100 l4 -2.4 4 2.4 -4 2.4z"/>
         </g>
       </svg>
-      <div class="mono" aria-label="س گ"><b>س</b><i>&amp;</i><b>گ</b></div>
+      <div class="mono" aria-label="Rahiba &amp; Ayman"><b>Rahiba</b><i>&amp;</i><b>Ayman</b></div>
     </div>
     <p>هناك لحظة واحدة<br>تستحق أن تُزاح لها الستائر...</p>
-    <h2>سمير &amp; گولناز</h2>
+    <h2>راهبة &amp; أيمن</h2>
     <button class="open-btn" id="open-btn" type="button">
       <span>افتح الدعوة</span>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3c1.5 3.5 4 6 8 7-4 1-6.5 3.5-8 7-1.5-3.5-4-6-8-7 4-1 6.5-3.5 8-7z"/></svg>
@@ -353,14 +354,14 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
 
     <div class="kicker rv">دعوة زواج</div>
     <div class="lede rv">«بسم الله نبدأ أجمل فصول العمر»</div>
-    <div class="lede rv">يتشرّف السيد <strong>خيري قاسم</strong><br>بدعوتكم لحضور حفل زفاف ابنه</div>
+    <div class="lede rv">بكلّ الحبّ والفرح<br>ندعوكم لحضور حفل زفاف</div>
 
-    <h1 class="names rv" aria-label="سمير و گولناز">
-      <span class="n">سمير</span>
+    <h1 class="names rv" aria-label="راهبة و أيمن">
+      <span class="n">راهبة</span>
       <span class="amp">&amp;</span>
-      <span class="n">گولناز</span>
+      <span class="n">أيمن</span>
     </h1>
-    <div class="latin-names rv">Samir &amp; Golnaz</div>
+    <div class="latin-names rv">Rahiba &amp; Ayman</div>
 
     <div class="verse rv">نُقاسمكم سرورنا وجميل شعورنا<br>بكلّ حبٍّ نتشرّف بدعوتكم لمشاركتنا</div>
     <div class="night rv">لَيلة عُمرنا</div>
@@ -369,12 +370,12 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
   <section>
     <div class="eyebrow rv">The Date</div>
     <div class="date-plate rv">
-      <div class="side">الثلاثاء</div>
-      <div class="day">29</div>
-      <div class="side">سبتمبر</div>
+      <div class="side">السبت</div>
+      <div class="day">17</div>
+      <div class="side">أكتوبر</div>
     </div>
     <div class="year rv">2026</div>
-    <div class="time-line rv">الساعة 3:00 مساءً</div>
+    <div class="time-line rv">الساعة 6:00 مساءً</div>
   </section>
 
   <section id="countdown">
@@ -395,12 +396,12 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
       <div class="d rv">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M16 29s-9-8.6-9-15.5a9 9 0 0 1 18 0C25 20.4 16 29 16 29z"/><circle cx="16" cy="13.5" r="3.4"/></svg>
         <div class="k">المكان</div>
-        <div class="v">قاعة خملين الملكية</div>
+        <div class="v">قاعة سنوني للحفلات</div>
       </div>
       <div class="d rv">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="16" cy="16" r="12.5"/><circle cx="16" cy="16" r="10" stroke-dasharray="1 2.6"/><path d="M16 9v7l4.5 3"/></svg>
         <div class="k">الوقت</div>
-        <div class="v">3:00 مساءً</div>
+        <div class="v">6:00 مساءً</div>
       </div>
       <div class="d rv">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="11" y="3" width="10" height="16" rx="5"/><path d="M7 15a9 9 0 0 0 18 0M16 24v5M11 29h10"/><path d="M11 9h3M11 13h3" stroke-width=".9"/></svg>
@@ -410,11 +411,12 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
       <div class="d rv">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 10.5h5.5L12 7h8l2.5 3.5H28V26H4z"/><circle cx="16" cy="17.5" r="5.2"/><circle cx="16" cy="17.5" r="2.4"/></svg>
         <div class="k">التصوير</div>
-        <div class="v">أجيال</div>
+        <div class="v">سكاي كروب</div>
+        <img class="logo" src="sky-group.png" alt="Sky Group" width="200" height="192">
       </div>
     </div>
     <a class="map-link rv" id="map-link" target="_blank" rel="noopener noreferrer"
-       href="https://www.google.com/maps/search/?api=1&amp;query=%D9%82%D8%A7%D8%B9%D8%A9%20%D8%AE%D9%85%D9%84%D9%8A%D9%86%20%D8%A7%D9%84%D9%85%D9%84%D9%83%D9%8A%D8%A9">
+       href="https://maps.app.goo.gl/FGuvR81DcYF4pGHw9">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg>
       الموقع على الخريطة
     </a>
@@ -423,7 +425,7 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
   <section class="quote">
     <div class="mark rv" aria-hidden="true">&ldquo;</div>
     <blockquote class="rv">حين يلتقي قلبان على موعدٍ واحد،<br>تبدأ حكايةٌ لا تشبه سواها.</blockquote>
-    <div class="sig rv">سمير &amp; گولناز</div>
+    <div class="sig rv">راهبة &amp; أيمن</div>
   </section>
 
   <section class="closing">
@@ -432,8 +434,8 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
       <path d="M130 3 l9 9 -9 9 -9 -9z" stroke-width="1"/><circle cx="130" cy="12" r="2.2" fill="currentColor"/>
     </svg>
     <p class="rv">حضوركم هو اللمسة التي تكتمل بها فرحتنا،<br>وبكم تصبح هذه الليلة ذكرى لا تُنسى.</p>
-    <div class="sig rv">سمير &amp; گولناز</div>
-    <div class="dt rv">29 . 09 . 2026</div>
+    <div class="sig rv">راهبة &amp; أيمن</div>
+    <div class="dt rv">17 . 10 . 2026</div>
     <div class="bless rv">دامت الأفراح</div>
     <div class="fin rv">OUR STORY BEGINS HERE</div>
   </section>
@@ -451,7 +453,7 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
 document.documentElement.classList.add('js');
 
 /* ---- event settings ---- */
-const EVENT_DATE = new Date('2026-09-29T15:00:00+03:00');
+const EVENT_DATE = new Date('2026-10-17T18:00:00+03:00');
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* seeded random so the drawings look the same on every visit */
@@ -559,7 +561,7 @@ drawBloom('bloom',21);drawBloom('bloom-top',5);
 
 /* ---- date typed in, as in the film ---- */
 (function(){
-  const el=document.getElementById('date-type');const txt='29 . sep . 2026';
+  const el=document.getElementById('date-type');const txt='17 . oct . 2026';
   [...txt].forEach((ch,i)=>{const s=document.createElement('span');s.textContent=ch===' '?' ':ch;s.style.animationDelay=(.3+i*.08)+'s';el.appendChild(s)});
 })();
 
