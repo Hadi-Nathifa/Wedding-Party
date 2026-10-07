@@ -46,6 +46,10 @@ body.locked{overflow:hidden;height:100vh}
 
 /* ---------- Scene: the painted lake (fixed layers) ---------- */
 .scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#CFC3AE}
+.js .scene{opacity:0;transform:scale(1.08);transition:opacity 2.8s ease .3s, transform 6s cubic-bezier(.2,.6,.2,1) .3s}
+.js body.opened .scene{opacity:1;transform:none}
+#dust{opacity:0;transition:opacity 2s ease 1.5s}
+body.opened #dust{opacity:1}
 .scene-blur{ /* fills wide screens around the painting */
   display:none;position:absolute;inset:-40px;background:url(lake.jpg) center/cover no-repeat;
   filter:blur(22px) saturate(.9);opacity:.85;
@@ -107,50 +111,61 @@ body.locked{overflow:hidden;height:100vh}
 
 #dust{position:fixed;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
 
-/* ---------- Opening: sheer curtains & monogram ---------- */
-.opening{position:fixed;inset:0;z-index:50;display:grid;justify-items:center;align-items:start;padding:max(2vh,12px) 16px 24px}
+/* ---------- Opening: closed curtains & monogram ---------- */
+.opening{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:70px 16px 24px}
 .drape{
-  position:absolute;top:0;bottom:0;width:22%;z-index:0;
+  position:absolute;top:0;bottom:0;width:53%;z-index:0;
   background:
     repeating-linear-gradient(90deg,
-      rgba(251,246,237,.16) 0px, rgba(255,255,255,.50) 16px, rgba(236,226,208,.10) 34px,
-      rgba(255,253,248,.46) 52px, rgba(241,232,216,.14) 70px, rgba(251,246,237,.32) 88px);
-  box-shadow:0 0 60px rgba(122,91,50,.18);
-  transition:transform 2.4s cubic-bezier(.7,0,.2,1), opacity 2.4s ease;
+      rgba(251,246,237,.97) 0px, rgba(255,255,255,1) 16px, rgba(234,223,204,.97) 34px,
+      rgba(255,253,248,1) 52px, rgba(240,230,213,.97) 70px, rgba(251,246,237,.98) 88px);
+  box-shadow:0 0 60px rgba(122,91,50,.22);
+  transition:transform 2.6s cubic-bezier(.7,0,.2,1), opacity 2.6s ease;
 }
+.drape::before{ /* gold fringe along the hem */
+  content:"";position:absolute;left:0;right:0;bottom:0;height:16px;z-index:1;
+  background:
+    linear-gradient(180deg,#B8935A,#8A6A3B) top/100% 3px no-repeat,
+    repeating-linear-gradient(90deg,#C9A56A 0 2px,transparent 2px 5px) bottom/100% 13px no-repeat;
+}
+.valance{ /* swagged pelmet with gold trim across the top */
+  position:absolute;top:0;left:0;right:0;height:62px;z-index:2;pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 0,#F6EDDF 25px,#B8935A 26px,#B8935A 28px,transparent 29px) 0 26px/60px 30px repeat-x,
+    linear-gradient(180deg,#F1E6D3,#E8DAC1 70%,#B8935A 70%,#B8935A 74%,#EBDDC6 74%) top/100% 30px no-repeat;
+  filter:drop-shadow(0 6px 10px rgba(90,66,40,.25));
+  transition:transform 1.6s cubic-bezier(.7,0,.2,1) .4s;
+}
+.opening.open .valance{transform:translateY(-110%)}
 .drape::after{ /* light glowing through the fabric */
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0) 40%, rgba(169,132,79,.10));
 }
 .drape.l{left:0;transform-origin:left center}
-.drape.r{right:0;width:15%;transform-origin:right center}
-.opening.open .drape.l{transform:translateX(-100%) scaleX(.4);opacity:0}
-.opening.open .drape.r{transform:translateX(100%) scaleX(.4);opacity:0}
+.drape.r{right:0;transform-origin:right center}
+.opening.open .drape.l{transform:translateX(-96%) scaleX(.35)}
+.opening.open .drape.r{transform:translateX(96%) scaleX(.35)}
 .opening.gone{display:none}
 
 .seal{
-  position:relative;z-index:1;text-align:center;display:grid;justify-items:center;gap:8px;
-  width:min(320px,100%);padding:40px 20px 20px;
-  background:linear-gradient(180deg,rgba(250,245,236,.84),rgba(246,239,227,.74));
-  border:1px solid rgba(169,132,79,.55);border-radius:190px 190px 22px 22px;
-  box-shadow:0 30px 80px rgba(50,36,22,.30), inset 0 0 0 6px rgba(250,245,236,.35), inset 0 0 0 7px rgba(169,132,79,.30);
+  position:relative;z-index:1;text-align:center;display:grid;justify-items:center;gap:14px;
   transition:opacity 1.1s ease, transform 1.4s ease, filter 1.1s ease;
 }
 .opening.open .seal{opacity:0;transform:translateY(-24px) scale(.96);filter:blur(6px)}
 
 .date-type{
-  font-family:var(--f-script);font-size:clamp(1.3rem,5vw,1.6rem);color:var(--ink);
-  letter-spacing:.14em;direction:ltr;min-height:1.4em;
+  font-family:var(--f-script);font-size:clamp(1.5rem,5.5vw,2rem);color:var(--ink);
+  letter-spacing:.18em;direction:ltr;min-height:1.6em;
 }
 .date-type span{opacity:0;display:inline-block;animation:ink .5s ease forwards}
 @keyframes ink{from{opacity:0;filter:blur(4px)}to{opacity:1;filter:blur(0)}}
 
-.medallion{position:relative;width:min(160px,42vw);aspect-ratio:1;display:grid;place-items:center}
+.medallion{position:relative;width:min(250px,64vw);aspect-ratio:1;display:grid;place-items:center}
 .medallion svg.ring{position:absolute;inset:0;width:100%;height:100%;animation:turn 60s linear infinite}
 @keyframes turn{to{transform:rotate(360deg)}}
 .mono{
   display:grid;justify-items:center;direction:ltr;
-  font-family:var(--f-script);font-size:clamp(1.9rem,7.8vw,2.3rem);line-height:1.05;
+  font-family:var(--f-script);font-size:clamp(2.5rem,10.5vw,3.2rem);line-height:1.05;
 }
 .mono b{
   font-weight:400;background:var(--foil);background-size:220% 100%;
@@ -165,8 +180,8 @@ body.locked{overflow:hidden;height:100vh}
 @keyframes write{to{clip-path:inset(-20% -10% -20% -10%)}}
 @keyframes foil{to{background-position:-220% 0}}
 
-.seal p{color:var(--ink);font-size:.98rem;line-height:1.6;opacity:0;animation:ink 1.4s ease 3.6s forwards}
-.seal h2{font-family:var(--f-display);font-weight:400;font-size:1.5rem;color:var(--ink);opacity:0;animation:ink 1.4s ease 4s forwards}
+.seal p{color:var(--ink-soft);font-size:1.08rem;line-height:1.9;opacity:0;animation:ink 1.4s ease 3.6s forwards}
+.seal h2{font-family:var(--f-display);font-weight:400;font-size:1.7rem;color:var(--ink);opacity:0;animation:ink 1.4s ease 4s forwards}
 .open-btn{
   margin-top:6px;opacity:0;animation:ink 1.2s ease 4.5s forwards;
   font-family:var(--f-body);font-size:1.08rem;font-weight:700;color:var(--linen);
@@ -284,6 +299,11 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
 .map-link:hover{background:var(--gold-deep);color:var(--linen)}
 .map-link svg{width:18px;height:18px}
 
+/* song line */
+.lyric .note{width:30px;height:30px;color:var(--gold)}
+.lyric p{font-family:var(--f-display);font-size:clamp(1.5rem,6vw,1.95rem);line-height:1.9;color:var(--gold-deep)}
+.lyric-ref{font-size:.95rem;color:var(--ink-soft)}
+
 /* quote */
 .quote{position:relative;padding-inline:8px}
 .quote blockquote{font-family:var(--f-display);font-size:clamp(1.45rem,5.6vw,1.9rem);line-height:1.9;color:var(--ink);text-wrap:balance}
@@ -387,6 +407,7 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
 <div class="opening" id="opening">
   <div class="drape l" aria-hidden="true"></div>
   <div class="drape r" aria-hidden="true"></div>
+  <div class="valance" aria-hidden="true"></div>
   <div class="seal">
     <div class="guest" id="guest" hidden>دعوة خاصة إلى<b id="guest-name"></b></div>
     <div class="date-type" id="date-type" aria-label="17 oct 2026"></div>
@@ -417,13 +438,13 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
 </div>
 
 <!-- invitation -->
-<noscript><style>.opening{display:none}body.locked{overflow:auto;height:auto}</style></noscript>
+<noscript><style>.opening{display:none}.scene,#dust{opacity:1!important}body.locked{overflow:auto;height:auto}</style></noscript>
 <script>
 /* safety net: if anything stops the opening animation, still show the invitation */
 document.getElementById('open-btn').addEventListener('click',function(){
   setTimeout(function(){
     var o=document.getElementById('opening');
-    if(o && !o.classList.contains('open')){o.style.display='none';document.body.classList.remove('locked');document.documentElement.classList.remove('js');}
+    if(o && !o.classList.contains('open')){o.style.display='none';document.body.classList.add('opened');document.body.classList.remove('locked');document.documentElement.classList.remove('js');}
   },1200);
 });
 </script>
@@ -465,11 +486,10 @@ document.getElementById('open-btn').addEventListener('click',function(){
     <div class="year rv">2026</div>
     <div class="time-line rv">الساعة 6:00 مساءً</div>
     <div class="actions rv">
-      <a class="pill" id="cal-google" target="_blank" rel="noopener noreferrer"
-         href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%D8%B2%D9%81%D8%A7%D9%81%20%D8%B1%D8%A7%D9%87%D8%A8%D8%A9%20%26%20%D8%A3%D9%8A%D9%85%D9%86&amp;dates=20261017T150000Z/20261017T200000Z&amp;location=%D9%82%D8%A7%D8%B9%D8%A9%20%D8%B3%D9%86%D9%88%D9%86%D9%8A%20%D9%84%D9%84%D8%AD%D9%81%D9%84%D8%A7%D8%AA&amp;details=https%3A%2F%2Fmaps.app.goo.gl%2FFGuvR81DcYF4pGHw9">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg>
-        أضف إلى تقويم Google
-      </a>
+      <button class="pill" id="cal-android" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 10.5a5 5 0 0 1 10 0V17H7z"/><path d="M5 11v5M19 11v5M10 17v3M14 17v3M8.5 5.5 7.5 4M15.5 5.5l1-1.5"/><circle cx="10" cy="9" r=".6" fill="currentColor"/><circle cx="14" cy="9" r=".6" fill="currentColor"/></svg>
+        تقويم Android
+      </button>
       <button class="pill" id="cal-ics" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg>
         تقويم iPhone
@@ -519,6 +539,13 @@ document.getElementById('open-btn').addEventListener('click',function(){
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg>
       الموقع على الخريطة
     </a>
+  </section>
+
+  <section class="lyric">
+    <div class="eyebrow rv">Our Song</div>
+    <svg class="note rv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg>
+    <p class="rv">يأخذني من تحتِ ذراعي<br>يزرعني في إحدى الغيمات</p>
+    <div class="lyric-ref rv">من أغنية «كلمات»</div>
   </section>
 
   <section class="quote">
@@ -608,7 +635,10 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* ---- music ---- */
 const song=document.getElementById('song'),musicBtn=document.getElementById('music');
 function setPlaying(on){musicBtn.classList.toggle('playing',on);musicBtn.setAttribute('aria-pressed',on);musicBtn.setAttribute('aria-label',on?'إيقاف الموسيقى':'تشغيل الموسيقى')}
-function play(){song.play().then(()=>setPlaying(true)).catch(()=>setPlaying(false))}
+function play(){
+  song.volume=0;
+  song.play().then(()=>{setPlaying(true);let v=0;const f=setInterval(()=>{v=Math.min(.85,v+.05);song.volume=v;if(v>=.85)clearInterval(f)},150)}).catch(()=>setPlaying(false));
+}
 musicBtn.addEventListener('click',()=>{song.paused?play():(song.pause(),setPlaying(false))});
 
 /* ---- reveal ---- */
@@ -653,8 +683,8 @@ const cue=document.getElementById('cue'),toastEl=document.getElementById('toast'
 addEventListener('scroll',()=>{if(scrollY>40)cue.classList.remove('show')},{passive:true});
 function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>toastEl.classList.remove('show'),2400)}
 
-/* ---- calendar file for iPhone / Outlook ---- */
-document.getElementById('cal-ics').addEventListener('click',()=>{
+/* ---- calendar: iPhone gets an .ics file, Android opens its calendar app ---- */
+function saveIcs(){
   const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Rahiba-Ayman//Invitation//AR','BEGIN:VEVENT',
     'UID:rahiba-ayman-20261017@invitation','DTSTAMP:20261007T000000Z',
     'DTSTART:20261017T150000Z','DTEND:20261017T200000Z',
@@ -666,6 +696,17 @@ document.getElementById('cal-ics').addEventListener('click',()=>{
   a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));
   a.download='rahiba-ayman.ics';document.body.appendChild(a);a.click();a.remove();
   toast('تم تجهيز موعد الحفل للتقويم');
+}
+document.getElementById('cal-ics').addEventListener('click',saveIcs);
+document.getElementById('cal-android').addEventListener('click',()=>{
+  if(!/Android/i.test(navigator.userAgent)){saveIcs();return}
+  const e=encodeURIComponent;
+  location.href='intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/event;'+
+    'S.title='+e('زفاف راهبة & أيمن')+';S.eventLocation='+e('قاعة سنوني للحفلات')+';'+
+    'S.description='+e('https://maps.app.goo.gl/FGuvR81DcYF4pGHw9')+';'+
+    'l.beginTime=1792249200000;l.endTime=1792267200000;end';
+  // if no calendar app answered, fall back to the .ics file
+  setTimeout(()=>{if(!document.hidden)saveIcs()},1800);
 });
 
 /* ---- share ---- */
@@ -681,7 +722,7 @@ document.getElementById('share').addEventListener('click',async()=>{
 /* ---- opening the curtains ---- */
 const opening=document.getElementById('opening'),main=document.getElementById('main');
 document.getElementById('open-btn').addEventListener('click',()=>{
-  opening.classList.add('open');play();burst();
+  opening.classList.add('open');document.body.classList.add('opened');play();burst();
   setTimeout(()=>{if(scrollY<40)cue.classList.add('show')},4200);
   setTimeout(()=>{main.classList.add('visible');document.body.classList.remove('locked');document.querySelectorAll('.rv').forEach(el=>io.observe(el))},900);
   setTimeout(()=>opening.classList.add('gone'),2600);
