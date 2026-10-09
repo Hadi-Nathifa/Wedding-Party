@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>راهبة & أيمن</title>
-<meta name="description" content="دعوة زفاف راهبة & أيمن — السبت 17 أكتوبر 2026، قاعة سنوني للحفلات">
+<title>أيمن & راهبة</title>
+<meta name="description" content="دعوة زفاف أيمن & راهبة — السبت 17 أكتوبر 2026، قاعة سنوني للحفلات">
 <meta name="theme-color" content="#F6EFE3">
-<meta property="og:title" content="راهبة & أيمن — دعوة زفاف">
+<meta property="og:title" content="أيمن & راهبة — دعوة زفاف">
 <meta property="og:description" content="السبت 17 أكتوبر 2026 • 6:00 مساءً • قاعة سنوني للحفلات">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -459,10 +459,10 @@ section{padding-block:56px;display:grid;justify-items:center;gap:14px}
       <path class="ln water" pathLength="1" d="M8 262 C40 255 70 268 100 261 S160 255 190 262 S250 268 292 260"/>
       <path class="ln water2" pathLength="1" d="M60 274 C90 270 120 278 150 273 S210 270 240 274"/>
     </svg>
-      <div class="mono" aria-label="Rahiba &amp; Ayman"><b>Rahiba</b><i>&amp;</i><b>Ayman</b></div>
+      <div class="mono" aria-label="Ayman &amp; Rahiba"><b>Ayman</b><i>&amp;</i><b>Rahiba</b></div>
     </div>
     <p>هناك لحظة واحدة<br>تستحق أن تُزاح لها الستائر...</p>
-    <h2>راهبة &amp; أيمن</h2>
+    <h2>أيمن &amp; راهبة</h2>
     <button class="open-btn" id="open-btn" type="button">
       <span>افتح الدعوة</span>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3c1.5 3.5 4 6 8 7-4 1-6.5 3.5-8 7-1.5-3.5-4-6-8-7 4-1 6.5-3.5 8-7z"/></svg>
@@ -498,12 +498,12 @@ document.getElementById('open-btn').addEventListener('click',function(){
     <div class="lede rv">«بسم الله نبدأ أجمل فصول العمر»</div>
     <div class="lede rv">بكلّ الحبّ والفرح<br>ندعوكم لحضور حفل زفاف</div>
 
-    <h1 class="names rv" aria-label="راهبة و أيمن">
-      <span class="n">راهبة</span>
-      <span class="amp">&amp;</span>
+    <h1 class="names rv" aria-label="أيمن و راهبة">
       <span class="n">أيمن</span>
+      <span class="amp">&amp;</span>
+      <span class="n">راهبة</span>
     </h1>
-    <div class="latin-names rv">Rahiba &amp; Ayman</div>
+    <div class="latin-names rv">Ayman &amp; Rahiba</div>
 
     <div class="verse rv">نُقاسمكم سرورنا وجميل شعورنا<br>بكلّ حبٍّ نتشرّف بدعوتكم لمشاركتنا</div>
     <div class="night rv">لَيلة عُمرنا</div>
@@ -574,7 +574,7 @@ document.getElementById('open-btn').addEventListener('click',function(){
   <section class="quote">
     <div class="mark rv" aria-hidden="true">&ldquo;</div>
     <blockquote class="rv">حين يلتقي قلبان على موعدٍ واحد،<br>تبدأ حكايةٌ لا تشبه سواها.</blockquote>
-    <div class="sig rv">راهبة &amp; أيمن</div>
+    <div class="sig rv">أيمن &amp; راهبة</div>
   </section>
 
   <section class="closing">
@@ -583,7 +583,7 @@ document.getElementById('open-btn').addEventListener('click',function(){
       <path d="M130 3 l9 9 -9 9 -9 -9z" stroke-width="1"/><circle cx="130" cy="12" r="2.2" fill="currentColor"/>
     </svg>
     <p class="rv">حضوركم هو اللمسة التي تكتمل بها فرحتنا،<br>وبكم تصبح هذه الليلة ذكرى لا تُنسى.</p>
-    <div class="sig rv">راهبة &amp; أيمن</div>
+    <div class="sig rv">أيمن &amp; راهبة</div>
     <div class="dt rv">17 . 10 . 2026</div>
     <div class="bless rv">دامت الأفراح</div>
     <div class="fin rv">OUR STORY BEGINS HERE</div>
@@ -709,7 +709,7 @@ function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearT
 /* ---- share ---- */
 document.getElementById('share').addEventListener('click',async()=>{
   const url=location.href.split('?')[0].split('#')[0];
-  const data={title:'راهبة & أيمن',text:'دعوة زفاف راهبة & أيمن — السبت 17 أكتوبر 2026',url};
+  const data={title:'أيمن & راهبة',text:'دعوة زفاف أيمن & راهبة — السبت 17 أكتوبر 2026',url};
   try{
     if(navigator.share && /^https?:/.test(url)){await navigator.share(data);return}
     await navigator.clipboard.writeText(url);toast('تم نسخ رابط الدعوة');
