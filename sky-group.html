@@ -186,6 +186,8 @@ input:focus{outline:none;border-color:var(--gold)}
 .ticks{display:flex;justify-content:space-between;direction:ltr;font-size:.75rem;color:var(--mute);margin-top:8px}
 .dur{margin-top:10px;font-weight:700;color:var(--gold2);min-height:1.8em}
 .dur.bad{color:#ffb4a8}
+.incl{margin-top:12px;font-size:.92rem;color:var(--gold2)}
+.incl[hidden]{display:none}
 #send{width:100%;min-height:60px;font-size:1.08rem}
 
 /* التواصل */
@@ -390,9 +392,10 @@ footer a{color:var(--ink)}
       </fieldset>
       <fieldset><legend>إضافات</legend>
         <div class="chips">
-          <input type="checkbox" name="ex" id="x1" value="فيديو"><label for="x1">فيديو</label>
+          <input type="checkbox" name="ex" id="x1" value="فيديو"><label for="x1" id="x1l">فيديو</label>
           <input type="checkbox" name="ex" id="x2" value="ألبوم مطبوع"><label for="x2">ألبوم مطبوع</label>
         </div>
+        <p class="incl" id="incl">✓ تصوير الفيديو مشمول مع العرس</p>
       </fieldset>
       <div class="two">
         <div class="field"><label for="nm">الاسم</label><input type="text" id="nm" autocomplete="name"></div>
@@ -557,7 +560,11 @@ function arc(s){
 }
 function build(){
   const ev=(document.querySelector('input[name=ev]:checked')||{}).value||'مناسبة';
+  // العرس يشمل الفيديو دائماً، فخيار الفيديو يظهر لباقي المناسبات فقط
+  const wed=ev==='عرس';
+  $('x1').hidden=$('x1l').hidden=wed;if(wed)$('x1').checked=false;$('incl').hidden=!wed;
   const ex=[...document.querySelectorAll('input[name=ex]:checked')].map(x=>x.value);
+  if(wed)ex.unshift('فيديو (مشمول مع العرس)');
   const nm=$('nm').value.trim(),ph=$('ph').value.trim(),vn=$('vn').value.trim(),dt=$('dt').value;
   const s=span();
   const time=s.ok?`من ${fmt(t1.value)} إلى ${fmt(t2.value)}${s.next?' (تنتهي بعد منتصف الليل)':''}، المدة ${durTxt(s.d)}`:'لم يُحدد بعد';
